@@ -1,0 +1,66 @@
+<form [formGroup]="formGroup">
+      <div class=container>
+
+   
+          <div class="form-group">
+            <label>Paper</label>
+            <select class="form-select" formControlName = 'paperlanguage' >
+                <option *ngFor = "let paper of languages" value="{{paper.name}}">
+                    {{paper.name}}
+                </option>
+            </select>
+         </div>
+    
+         <div class="form-group">
+            <label>Question Id</label>
+            <input type="text" formControlName="questionId" class="form-control"  />
+          </div>
+
+          <div class="form-group">
+            <label>Question</label>
+            <input type="text" formControlName="question" class="form-control"  />
+          </div>
+    
+          <div class="form-group">
+            <label>Answer</label>
+            <input type="text" formControlName="answer" class="form-control"  />
+        </div>
+    
+        <div class="form-group">
+            <label>Options:  </label>
+            <button  class="btn btn-primary" (click)="addOption()">Add Option</button>           
+        </div>
+        
+      <div *ngFor="let o of GetOption.controls;let i=index">
+          <div >
+            <label>Option</label>
+            <input type="text" formControlName="name"/>
+          </div>
+
+      </div>
+    
+    <div>
+          <button  class="btn btn-primary" (click)="submit()">Submit</button>
+      
+      </div>
+    </div>
+      <div *ngFor="let p of result;let i=index">
+        
+        {{p.questionId}}
+        {{p.paperlanguage}}
+        {{p.question}}
+        {{p.answer}}
+       <!-- {{p.option}} -->
+       <ul *ngFor = "let option of p.option">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1">
+          <label class="form-check-label" for="inlineRadio1">{{option.name}}</label>
+        </div>
+      </ul>
+
+      <button  class="btn btn-primary" (click)="edit(p.questionId,i)">Edit </button>
+      <!-- <button  class="btn btn-primary" (click)="submit()">Delete</button> -->
+      </div>
+    
+      
+</form>
